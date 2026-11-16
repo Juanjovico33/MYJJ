@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños, Margoth! ✨🎂</title>
+    
+    <!-- Tailwind CSS para diseño responsivo y utilidades modernas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tipografías elegantes de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           ESTILOS PERSONALIZADOS Y ANIMACIONES FESTIVAS
+           ========================================================================== */
+        :root {
+            --gold-light: #fde68a;
+            --gold-main: #fbbf24;
+            --rose-light: #fbcfe8;
+            --rose-main: #f472b6;
+            --deep-night: #060818;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(ellipse at bottom, #1b1438 0%, #0d102b 45%, #050714 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Lienzo de Fuegos Artificiales a Pantalla Completa */
+        #fireworksCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            cursor: crosshair;
+            display: block;
+        }
+
+        /* Tipografías especiales */
+        .font-script {
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .font-serif-display {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .font-lora {
+            font-family: 'Lora', serif;
+        }
+
+        /* Efecto Glassmorphism (Cristal Esmerilado) para la tarjeta central */
+        .glass-card {
+            background: linear-gradient(
+                145deg,
+                rgba(22, 20, 48, 0.62) 0%,
+                rgba(14, 15, 36, 0.75) 100%
+            );
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(253, 230, 138, 0.28);
+            box-shadow: 
+                0 25px 60px -12px rgba(0, 0, 0, 0.75),
+                0 0 40px rgba(244, 114, 182, 0.14),
+                inset 0 1px 1px rgba(255, 255, 255, 0.18);
+        }
+
+        /* Brillo animado dorado y rosado para el nombre de Margoth */
+        .shimmer-title {
+            background: linear-gradient(
+                90deg,
+                #fde68a 0%,
+                #f9a8d4 25%,
+                #ffffff 50%,
+                #fbbf24 75%,
+                #fde68a 100%
+            );
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shineText 4.5s linear infinite;
+            filter: drop-shadow(0 2px 14px rgba(251, 191, 36, 0.35));
+        }
+
+        @keyframes shineText {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* Animación suave de flotación para detalles decorativos */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .animate-float {
+            animation: floatSlow 3.8s ease-in-out infinite;
+        }
+
+        /* Transiciones del Carrusel de Fotos */
+        .carousel-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transform: scale(1.06);
+            transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1), transform 5.5s ease-out;
+            pointer-events: none;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+            z-index: 2;
+        }
+
+        /* Marco luminoso del carrusel */
+        .photo-frame-glow {
+            box-shadow: 
+                0 0 0 1px rgba(253, 230, 138, 0.35),
+                0 12px 32px -6px rgba(0, 0, 0, 0.65),
+                0 0 25px rgba(244, 114, 182, 0.22);
+        }
+
+        /* Botones interactivos con efecto cristal y brillo */
+        .btn-festive {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.22), rgba(244, 114, 182, 0.25));
+            border: 1px solid rgba(253, 230, 138, 0.42);
+            backdrop-filter: blur(8px);
+            transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .btn-festive:hover {
+            transform: translateY(-2px) scale(1.02);
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.36), rgba(244, 114, 182, 0.38));
+            border-color: rgba(253, 230, 138, 0.8);
+            box-shadow: 0 8px 24px rgba(244, 114, 182, 0.3);
+        }
+
+        .btn-festive:active {
+            transform: scale(0.97);
+        }
+
+        /* Nota musical flotante cuando suena la melodía */
+        @keyframes noteRise {
+            0% {
+                opacity: 0;
+                transform: translateY(0) rotate(-10deg) scale(0.8);
+            }
+            30% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-38px) rotate(15deg) scale(1.15);
+            }
+        }
+
+        .music-note-particle {
+            position: absolute;
+            pointer-events: none;
+            animation: noteRise 1.8s ease-out forwards;
+        }
+
+        /* Barra de desplazamiento elegante */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070919;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(251, 191, 36, 0.35);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(251, 191, 36, 0.6);
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen py-6 px-3 sm:px-6">
+
+    <!-- ======================================================================
+         LIENZO DE FUEGOS ARTIFICIALES Y CIELO ESTRELLADO
+         ====================================================================== -->
+    <canvas id="fireworksCanvas" aria-label="Cielo nocturno con fuegos artificiales celebrando a Margoth"></canvas>
+
+    <!-- ======================================================================
+         CONTROLES SUPERIORES FLOTANTES (MÚSICA Y GRAN TRACA)
+         ====================================================================== -->
+    <header class="relative z-20 w-full max-w-2xl flex flex-wrap items-center justify-between gap-2 mb-4 px-1">
+        <!-- Botón de Melodía de Cumpleaños (Web Audio API) -->
+        <button 
+            id="musicToggleBtn"
+            type="button"
+            class="btn-festive relative flex items-center gap-2 px-4 py-2.5 rounded-full text-xs sm:text-sm font-medium text-amber-100 shadow-lg cursor-pointer"
+            aria-label="Activar o pausar música de cumpleaños"
+        >
+            <span id="musicIcon" class="text-base">🎵</span>
+            <span id="musicLabel">Dale play a la Música</span>
+        </button>
+
+        <!-- Botón de Gran Traca / Lluvia de Fuegos Artificiales -->
+        <button 
+            id="grandFinaleBtn"
+            type="button"
+            class="btn-festive flex items-center gap-2 px-4 py-2.5 rounded-full text-xs sm:text-sm font-medium text-pink-100 shadow-lg cursor-pointer"
+            aria-label="Lanzar gran lluvia de fuegos artificiales"
+        >
+            <span class="text-base">🎆</span>
+            <span>Juegos Artificiales</span>
+        </button>
+    </header>
+
+    <!-- ======================================================================
+         TARJETA CENTRAL GLASSMORPHISM PARA MARGOTH
+         ====================================================================== -->
+    <main class="relative z-10 w-full max-w-2xl glass-card rounded-3xl p-5 sm:p-8 md:p-10 text-center transition-all duration-500">
+        
+        <!-- Ornamento superior -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-300/10 border border-amber-200/25 text-amber-200 text-xs tracking-widest uppercase mb-3 animate-float">
+            <span>✨</span>
+            <span>Un día muy especial</span>
+            <span>✨</span>
+        </div>
+
+        <!-- Título Principal Animado -->
+        <h1 class="font-script text-5xl sm:text-6xl md:text-7xl leading-tight shimmer-title py-1 mb-1">
+            ¡Feliz Cumpleaños, Margoth!
+        </h1>
+        <div class="text-2xl sm:text-3xl mb-5 select-none" aria-hidden="true">
+            ✨🎂💖✨
+        </div>
+
+        <!-- ==================================================================
+             CARRUSEL DE FOTOS INTERACTIVO EN EL CENTRO
+             ================================================================== -->
+        <section aria-label="Galería de recuerdos para Margoth" class="my-5">
+            <div 
+                id="carouselContainer"
+                class="relative w-full aspect-[4/3] sm:aspect-[16/10] rounded-2xl overflow-hidden photo-frame-glow bg-slate-900/80 select-none group"
+            >
+                <!-- Contenedor dinámico de diapositivas -->
+                <div id="carouselSlides" class="w-full h-full relative"></div>
+
+                <!-- Degradado inferior para legibilidad del pie de foto -->
+                <div class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/85 via-black/40 to-transparent z-10 pointer-events-none"></div>
+
+                <!-- Pie de foto cariñoso -->
+                <div class="absolute inset-x-0 bottom-8 sm:bottom-9 z-20 px-4 text-center">
+                    <p id="slideCaption" class="font-serif-display italic text-base sm:text-lg md:text-xl text-amber-100 drop-shadow-md transition-opacity duration-500">
+                        Tu sonrisa ilumina cada día
+                    </p>
+                </div>
+
+                <!-- Indicadores de puntos inferiores -->
+                <div id="carouselDots" class="absolute bottom-3 inset-x-0 z-20 flex items-center justify-center gap-2"></div>
+
+                <!-- Botón Anterior -->
+                <button 
+                    id="prevSlideBtn"
+                    type="button"
+                    aria-label="Foto anterior"
+                    class="absolute left-2.5 sm:left-3.5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/45 hover:bg-black/70 border border-white/25 text-white flex items-center justify-center backdrop-blur-md transition-all duration-200 opacity-85 sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100 cursor-pointer"
+                >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+
+                <!-- Botón Siguiente -->
+                <button 
+                    id="nextSlideBtn"
+                    type="button"
+                    aria-label="Foto siguiente"
+                    class="absolute right-2.5 sm:right-3.5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/45 hover:bg-black/70 border border-white/25 text-white flex items-center justify-center backdrop-blur-md transition-all duration-200 opacity-85 sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100 cursor-pointer"
+                >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Separador ornamental dorado -->
+        <div class="flex items-center justify-center gap-3 my-5 opacity-75" aria-hidden="true">
+            <span class="h-px w-16 sm:w-24 bg-gradient-to-r from-transparent to-amber-300/70"></span>
+            <span class="text-amber-300 text-sm">✦</span>
+            <span class="h-px w-16 sm:w-24 bg-gradient-to-l from-transparent to-amber-300/70"></span>
+        </div>
+
+        <!-- ==================================================================
+             MENSAJE EMOTIVO DE FELICITACIÓN
+             ================================================================== -->
+        <article class="px-1 sm:px-4">
+            <p class="font-lora text-sm sm:text-base md:text-[17px] leading-relaxed text-slate-100/95">
+                Hoy celebramos la vida de una persona increíble. 
+                <strong class="font-semibold text-amber-200">Margoth</strong>, gracias por tu alegría, tu luz y por los momentos compartidos. 
+                Que este nuevo año de vida Dios te regale salud, sueños cumplidos y toda la felicidad del mundo que te mereces. 
+                <span class="block mt-2.5 font-serif-display italic text-pink-200 text-lg sm:text-xl">
+                    ¡Te quiero muchísimo tu mejor amigo Juanjo! 💖
+                </span>
+            </p>
+        </article>
+
+        <!-- Firma / Pie de tarjeta -->
+        <footer class="mt-6 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-300/80">
+            <span>Nota </span>
+            <span class="text-amber-200/80">✨ Te hare tocar el cielo cuando usted quiera mi preciosa</span>
+        </footer>
+    </main>
+
+    <!-- ======================================================================
+         NOTIFICACIÓN FLOTANTE PERSONALIZADA (SIN ALERTAS NATIVAS)
+         ====================================================================== -->
+    <div 
+        id="toastNotification"
+        role="status"
+        aria-live="polite"
+        class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 px-5 py-2.5 rounded-full bg-slate-900/90 border border-amber-300/45 text-amber-100 text-xs sm:text-sm shadow-2xl backdrop-blur-md opacity-0 translate-y-4 pointer-events-none transition-all duration-300"
+    ></div>
+
+    <!-- ======================================================================
+         LÓGICA INTERACTIVA: FUEGOS ARTIFICIALES, CARRUSEL Y CAJITA MUSICAL
+         ====================================================================== -->
+    <script>
+        /**
+         * ====================================================================
+         * FOTOS PRECARGADAS DEL CARRUSEL PARA MARGOTH
+         * Se cargan automáticamente al abrir la página sin necesidad de subir
+         * archivos. También puedes cambiar cualquier URL por tus propias fotos.
+         * ====================================================================
+         */
+        const FOTOS_CARRUSEL = [
+            {
+                url: 'img/1.jpg',
+                frase: 'Gracias por existir y hacer el mundo más bonito',
+                emoji: '🌸✨',
+                colores: ['#3b0764', '#9d174d']
+            },
+            {
+                url: 'img/2.png',
+                frase: 'Tu sonrisa ilumina cada día',
+                emoji: '✨💖',
+                colores: ['#1e1b4b', '#831843']
+            },
+            {
+                url: 'img/3.png',
+                frase: 'Por miles de momentos felices juntos',
+                emoji: '🎇🥂',
+                colores: ['#311042', '#b45309']
+            },
+            {
+                url: 'img/4.jpg',
+                frase: 'Que se cumplan todos tus deseos',
+                emoji: '🎂🕯️',
+                colores: ['#4c1d95', '#be185d']
+            },
+            {
+                url: 'img/5.jpeg',
+                frase: '¡Feliz cumpleaños, Margoth! Te quiero muchísimo',
+                emoji: '🎈💝',
+                colores: ['#2e1065', '#9f1239']
+            },
+            {
+                url: 'img/6.jpeg',
+                frase: '¡Feliz cumpleaños, Margoth! Te quiero muchísimo',
+                emoji: '🎈💝',
+                colores: ['#2e1065', '#9f1239']
+            },
+            {
+                url: 'img/7.png',
+                frase: 'Feliz cumpleaños, mi persona favorita',
+                emoji: '🎈💝',
+                colores: ['#2e1065', '#9f1239']
+            },
+            {
+                url: 'img/8.jpeg',
+                frase: '¡Recuerda que siempre contaras conmigo!!',
+                emoji: '🎈💝',
+                colores: ['#2e1065', '#9f1239']
+            },
+            {
+                url: 'img/9.png',
+                frase: '¡Gracias por existir en mi mundo',
+                emoji: '🎈💝',
+                colores: ['#2e1065', '#9f1239']
+            },
+            {
+                url: 'img/10.png',
+                frase: '¡Quiero que sepas que siempre seras mi lugar favorito',
+                emoji: '🎈💝',
+                colores: ['#2e1065', '#9f1239']
+            }
+        ];
+
+        /**
+         * Muestra una notificación elegante en pantalla sin usar alert()
+         * @param {string} message - Texto a mostrar
+         */
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            if (!toast) return;
+            toast.textContent = message;
+            toast.classList.remove('opacity-0', 'translate-y-4');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            clearTimeout(window._toastTimer);
+            window._toastTimer = setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'translate-y-4');
+            }, 3400);
+        }
+
+        /* ====================================================================
+           1. MOTOR DE FUEGOS ARTIFICIALES, ESTRELLAS Y CORAZONES EN CANVAS 2D
+           ==================================================================== */
+        (function initFireworksEngine() {
+            const canvas = document.getElementById('fireworksCanvas');
+            const ctx = canvas.getContext('2d');
+
+            let width = window.innerWidth;
+            let height = window.innerHeight;
+            let dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+            // Paletas festivas (dorado, rosa intenso, magenta, turquesa, blanco perlado)
+            const PALETTES = [
+                ['#FFD700', '#FDE68A', '#FFFBEB', '#F59E0B'], // Dorado real
+                ['#FF4D94', '#F472B6', '#FBCFE8', '#FFFFFF'], // Rosa intenso y perla
+                ['#EC4899', '#E879F9', '#F5D0FE', '#FDE68A'], // Magenta y oro
+                ['#40E0D0', '#67E8F9', '#A5F3FC', '#FFFFFF'], // Turquesa luminoso
+                ['#FB7185', '#FDBA74', '#FEF08A', '#FFF1F2']  // Coral y champán
+            ];
+
+            let stars = [];
+            let goldParticles = [];
+            let floatingHearts = [];
+            let rockets = [];
+            let particles = [];
+
+            /**
+             * Ajusta el tamaño del lienzo de forma responsiva y regenera atmósfera
+             */
+            function resizeCanvas() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+                canvas.width = width * dpr;
+                canvas.height = height * dpr;
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+                generateAtmosphere();
+            }
+
+            /**
+             * Crea estrellas titilantes y partículas doradas flotando suavemente
+             */
+            function generateAtmosphere() {
+                const starCount = Math.floor((width * height) / 9000);
+                stars = [];
+                for (let i = 0; i < starCount; i++) {
+                    stars.push({
+                        x: Math.random() * width,
+                        y: Math.random() * (height * 0.88),
+                        radius: Math.random() * 1.6 + 0.4,
+                        baseAlpha: Math.random() * 0.65 + 0.25,
+                        twinkleSpeed: Math.random() * 0.03 + 0.01,
+                        phase: Math.random() * Math.PI * 2
+                    });
+                }
+
+                const goldCount = Math.min(48, Math.floor(width / 26));
+                goldParticles = [];
+                for (let i = 0; i < goldCount; i++) {
+                    goldParticles.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        radius: Math.random() * 2.1 + 0.8,
+                        vy: -(Math.random() * 0.35 + 0.12),
+                        vx: (Math.random() - 0.5) * 0.25,
+                        alpha: Math.random() * 0.55 + 0.2,
+                        phase: Math.random() * Math.PI * 2
+                    });
+                }
+            }
+
+            /**
+             * Genera corazones luminosos flotando hacia el cielo
+             */
+            function spawnFloatingHearts(originX, originY, count = 6) {
+                const heartColors = ['#f472b6', '#fb7185', '#fde68a', '#e879f9'];
+                for (let i = 0; i < count; i++) {
+                    floatingHearts.push({
+                        x: originX + (Math.random() - 0.5) * 90,
+                        y: originY + (Math.random() - 0.5) * 40,
+                        size: Math.random() * 10 + 9,
+                        vy: -(Math.random() * 1.3 + 0.8),
+                        vx: (Math.random() - 0.5) * 0.9,
+                        wobble: Math.random() * Math.PI * 2,
+                        alpha: 0.95,
+                        color: heartColors[Math.floor(Math.random() * heartColors.length)]
+                    });
+                }
+            }
+
+            /**
+             * Dibuja un corazón suave en el lienzo
+             */
+            function drawHeartShape(x, y, size, color, alpha) {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.globalAlpha = Math.max(0, alpha);
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                const topCurveHeight = size * 0.3;
+                ctx.moveTo(0, topCurveHeight);
+                ctx.bezierCurveTo(0, 0, -size / 2, 0, -size / 2, topCurveHeight);
+                ctx.bezierCurveTo(-size / 2, (size + topCurveHeight) / 2, 0, (size + topCurveHeight) / 1.4, 0, size);
+                ctx.bezierCurveTo(0, (size + topCurveHeight) / 1.4, size / 2, (size + topCurveHeight) / 2, size / 2, topCurveHeight);
+                ctx.bezierCurveTo(size / 2, 0, 0, 0, 0, topCurveHeight);
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+            }
+
+            /**
+             * Clase Cohete: asciende dejando estela luminosa hasta su objetivo
+             */
+            class Rocket {
+                constructor(startX, targetX, targetY, forceHeart = false) {
+                    this.x = startX;
+                    this.y = height + 10;
+                    this.targetX = targetX;
+                    this.targetY = targetY;
+
+                    const dx = targetX - startX;
+                    const dy = targetY - this.y;
+                    const distance = Math.hypot(dx, dy);
+                    const speed = Math.max(7.5, Math.min(12.5, distance * 0.022));
+                    const angle = Math.atan2(dy, dx);
+
+                    this.vx = Math.cos(angle) * speed;
+                    this.vy = Math.sin(angle) * speed;
+                    this.trail = [];
+                    this.palette = PALETTES[Math.floor(Math.random() * PALETTES.length)];
+                    this.color = this.palette[0];
+                    this.isHeart = forceHeart || Math.random() < 0.24; // 24% de explosiones en forma de corazón
+                    this.exploded = false;
+                }
+
+                update() {
+                    this.trail.push({ x: this.x, y: this.y });
+                    if (this.trail.length > 10) this.trail.shift();
+
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    // Ligera desaceleración gravitatoria al subir
+                    this.vy += 0.045;
+
+                    const distToTarget = Math.hypot(this.targetX - this.x, this.targetY - this.y);
+                    if (distToTarget < 18 || this.vy >= -0.8) {
+                        this.explode();
+                        this.exploded = true;
+                    }
+                }
+
+                draw() {
+                    // Estela luminosa
+                    for (let i = 0; i < this.trail.length; i++) {
+                        const point = this.trail[i];
+                        const progress = i / this.trail.length;
+                        ctx.beginPath();
+                        ctx.arc(point.x, point.y, progress * 2.4, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(253, 230, 138, ${progress * 0.7})`;
+                        ctx.fill();
+                    }
+
+                    // Punta brillante del cohete
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, 2.8, 0, Math.PI * 2);
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.fill();
+                }
+
+                explode() {
+                    if (this.isHeart) {
+                        // Explosión paramétrica en forma de corazón para Margoth
+                        const count = 84;
+                        const scale = Math.min(width, height) * 0.0085 + 2.8;
+                        for (let i = 0; i < count; i++) {
+                            const t = (Math.PI * 2 * i) / count;
+                            const hx = 16 * Math.pow(Math.sin(t), 3);
+                            const hy = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+                            const color = this.palette[i % this.palette.length];
+                            particles.push(new Particle(
+                                this.x,
+                                this.y,
+                                (hx * scale) / 14,
+                                (hy * scale) / 14,
+                                color,
+                                true
+                            ));
+                        }
+                    } else {
+                        // Explosión esférica clásica con chispas brillantes
+                        const count = 85 + Math.floor(Math.random() * 40);
+                        for (let i = 0; i < count; i++) {
+                            const angle = Math.random() * Math.PI * 2;
+                            const speed = Math.pow(Math.random(), 0.55) * 6.2 + 0.8;
+                            const color = this.palette[Math.floor(Math.random() * this.palette.length)];
+                            particles.push(new Particle(
+                                this.x,
+                                this.y,
+                                Math.cos(angle) * speed,
+                                Math.sin(angle) * speed,
+                                color,
+                                false
+                            ));
+                        }
+                    }
+                }
+            }
+
+            /**
+             * Clase Partícula: chispas que caen con gravedad, fricción y parpadeo
+             */
+            class Particle {
+                constructor(x, y, vx, vy, color, isHeartParticle) {
+                    this.x = x;
+                    this.y = y;
+                    this.vx = vx;
+                    this.vy = vy;
+                    this.color = color;
+                    this.alpha = 1;
+                    this.decay = isHeartParticle
+                        ? Math.random() * 0.011 + 0.011
+                        : Math.random() * 0.014 + 0.012;
+                    this.gravity = isHeartParticle ? 0.032 : 0.055;
+                    this.friction = 0.965;
+                    this.size = Math.random() * 2.2 + 1.1;
+                    this.sparkle = Math.random() > 0.35;
+                    this.history = [];
+                }
+
+                update() {
+                    this.history.push({ x: this.x, y: this.y });
+                    if (this.history.length > 5) this.history.shift();
+
+                    this.vx *= this.friction;
+                    this.vy *= this.friction;
+                    this.vy += this.gravity;
+
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    this.alpha -= this.decay;
+                }
+
+                draw() {
+                    if (this.alpha <= 0) return;
+
+                    // Trazo sutil de caída
+                    if (this.history.length > 1) {
+                        ctx.beginPath();
+                        ctx.moveTo(this.history[0].x, this.history[0].y);
+                        ctx.lineTo(this.x, this.y);
+                        ctx.strokeStyle = this.color;
+                        ctx.globalAlpha = Math.max(0, this.alpha * 0.45);
+                        ctx.lineWidth = this.size * 0.8;
+                        ctx.stroke();
+                    }
+
+                    // Destello principal
+                    const flicker = this.sparkle ? (Math.random() * 0.35 + 0.65) : 1;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.globalAlpha = Math.max(0, this.alpha * flicker);
+                    ctx.fill();
+                    ctx.globalAlpha = 1;
+                }
+            }
+
+            /**
+             * Lanza un cohete hacia coordenadas específicas
+             */
+            function launchFirework(targetX, targetY, forceHeart = false) {
+                const startX = width * (0.2 + Math.random() * 0.6);
+                rockets.push(new Rocket(startX, targetX, targetY, forceHeart));
+            }
+
+            /**
+             * Lanza una Gran Traca festiva con fuegos artificiales y corazones flotantes
+             */
+            function triggerGrandFinale() {
+                showToast('🎆 ¡Feliz cumpleaños para Preciosa te quiero mucho! 💖');
+                const total = 15;
+                for (let i = 0; i < total; i++) {
+                    setTimeout(() => {
+                        const tx = width * (0.12 + Math.random() * 0.76);
+                        const ty = height * (0.12 + Math.random() * 0.38);
+                        const makeHeart = (i % 3 === 0);
+                        launchFirework(tx, ty, makeHeart);
+                        if (i % 2 === 0) {
+                            spawnFloatingHearts(tx, height * 0.75, 4);
+                        }
+                    }, i * 230);
+                }
+            }
+
+            // Interacción al hacer clic o tocar el cielo nocturno
+            canvas.addEventListener('pointerdown', (e) => {
+                const isHeart = Math.random() < 0.38;
+                launchFirework(e.clientX, e.clientY, isHeart);
+                if (isHeart) {
+                    spawnFloatingHearts(e.clientX, e.clientY, 3);
+                }
+            });
+
+            // Botón de Gran Traca
+            const grandFinaleBtn = document.getElementById('grandFinaleBtn');
+            if (grandFinaleBtn) {
+                grandFinaleBtn.addEventListener('click', triggerGrandFinale);
+            }
+
+            // Lanzamiento automático suave en segundo plano
+            let lastAutoLaunch = 0;
+            function animateLoop(timestamp) {
+                // Estela suave de desvanecimiento nocturno
+                ctx.fillStyle = 'rgba(7, 9, 25, 0.22)';
+                ctx.fillRect(0, 0, width, height);
+
+                // Dibujar estrellas titilantes
+                for (let i = 0; i < stars.length; i++) {
+                    const s = stars[i];
+                    s.phase += s.twinkleSpeed;
+                    const alpha = s.baseAlpha + Math.sin(s.phase) * 0.22;
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 250, 235, ${Math.max(0.08, alpha)})`;
+                    ctx.fill();
+                }
+
+                // Dibujar partículas doradas flotando suavemente
+                for (let i = 0; i < goldParticles.length; i++) {
+                    const g = goldParticles[i];
+                    g.y += g.vy;
+                    g.x += g.vx + Math.sin(g.phase) * 0.15;
+                    g.phase += 0.02;
+
+                    if (g.y < -10) {
+                        g.y = height + 10;
+                        g.x = Math.random() * width;
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(g.x, g.y, g.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(253, 230, 138, ${g.alpha + Math.sin(g.phase) * 0.15})`;
+                    ctx.fill();
+                }
+
+                // Actualizar y dibujar corazones flotantes
+                for (let i = floatingHearts.length - 1; i >= 0; i--) {
+                    const h = floatingHearts[i];
+                    h.wobble += 0.05;
+                    h.x += h.vx + Math.sin(h.wobble) * 0.45;
+                    h.y += h.vy;
+                    h.alpha -= 0.0065;
+
+                    drawHeartShape(h.x, h.y, h.size, h.color, h.alpha);
+
+                    if (h.alpha <= 0 || h.y < -30) {
+                        floatingHearts.splice(i, 1);
+                    }
+                }
+
+                // Lanzar fuego artificial automático cada ~1.45 segundos
+                if (timestamp - lastAutoLaunch > 1450) {
+                    const tx = width * (0.14 + Math.random() * 0.72);
+                    const ty = height * (0.12 + Math.random() * 0.36);
+                    launchFirework(tx, ty);
+                    lastAutoLaunch = timestamp;
+                }
+
+                // Actualizar y dibujar cohetes
+                for (let i = rockets.length - 1; i >= 0; i--) {
+                    rockets[i].update();
+                    rockets[i].draw();
+                    if (rockets[i].exploded) {
+                        rockets.splice(i, 1);
+                    }
+                }
+
+                // Actualizar y dibujar partículas
+                ctx.globalCompositeOperation = 'lighter';
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    particles[i].update();
+                    particles[i].draw();
+                    if (particles[i].alpha <= 0) {
+                        particles.splice(i, 1);
+                    }
+                }
+                ctx.globalCompositeOperation = 'source-over';
+
+                requestAnimationFrame(animateLoop);
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            // Salva inicial de bienvenida al cargar
+            setTimeout(() => {
+                launchFirework(width * 0.28, height * 0.24, true);
+                setTimeout(() => launchFirework(width * 0.72, height * 0.22, false), 320);
+                setTimeout(() => launchFirework(width * 0.50, height * 0.18, true), 650);
+            }, 350);
+
+            requestAnimationFrame(animateLoop);
+        })();
+
+        /* ====================================================================
+           2. CARRUSEL DE FOTOS PRECARGADAS CON RESPALDO ARTÍSTICO EN CANVAS
+           ==================================================================== */
+        (function initPhotoCarousel() {
+            /**
+             * Dibuja una ilustración artística en un <canvas> como respaldo automático
+             * si alguna imagen externa tardara o no pudiera cargarse.
+             */
+            function generarIlustracionCanvas(frase, emoji, color1, color2) {
+                const offCanvas = document.createElement('canvas');
+                offCanvas.width = 960;
+                offCanvas.height = 640;
+                const c = offCanvas.getContext('2d');
+
+                // Fondo degradado elegante
+                const grad = c.createLinearGradient(0, 0, offCanvas.width, offCanvas.height);
+                grad.addColorStop(0, color1);
+                grad.addColorStop(1, color2);
+                c.fillStyle = grad;
+                c.fillRect(0, 0, offCanvas.width, offCanvas.height);
+
+                // Resplandor central suave
+                const radial = c.createRadialGradient(480, 290, 20, 480, 290, 320);
+                radial.addColorStop(0, 'rgba(255, 255, 255, 0.26)');
+                radial.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                c.fillStyle = radial;
+                c.fillRect(0, 0, offCanvas.width, offCanvas.height);
+
+                // Destellos dorados decorativos
+                for (let i = 0; i < 36; i++) {
+                    c.beginPath();
+                    c.arc(
+                        Math.random() * offCanvas.width,
+                        Math.random() * offCanvas.height,
+                        Math.random() * 3 + 1,
+                        0,
+                        Math.PI * 2
+                    );
+                    c.fillStyle = `rgba(253, 230, 138, ${Math.random() * 0.6 + 0.2})`;
+                    c.fill();
+                }
+
+                // Aro dorado ornamental
+                c.save();
+                c.beginPath();
+                c.arc(480, 265, 118, 0, Math.PI * 2);
+                c.strokeStyle = 'rgba(253, 230, 138, 0.5)';
+                c.lineWidth = 2.5;
+                c.setLineDash([8, 8]);
+                c.stroke();
+                c.restore();
+
+                // Emoji central
+                c.font = '88px sans-serif';
+                c.textAlign = 'center';
+                c.textBaseline = 'middle';
+                c.fillText(emoji, 480, 268);
+
+                // Dedicatoria elegante
+                c.font = 'italic 30px Georgia, serif';
+                c.fillStyle = '#fef3c7';
+                c.fillText(frase, 480, 430);
+
+                return offCanvas.toDataURL('image/png');
+            }
+
+            let currentIndex = 0;
+            let autoPlayTimer = null;
+            let isPaused = false;
+
+            const slidesContainer = document.getElementById('carouselSlides');
+            const dotsContainer = document.getElementById('carouselDots');
+            const captionEl = document.getElementById('slideCaption');
+            const carouselContainer = document.getElementById('carouselContainer');
+            const prevBtn = document.getElementById('prevSlideBtn');
+            const nextBtn = document.getElementById('nextSlideBtn');
+
+            /**
+             * Renderiza las diapositivas precargadas y los puntos indicadores en el DOM
+             */
+            function renderCarousel() {
+                slidesContainer.innerHTML = '';
+                dotsContainer.innerHTML = '';
+
+                FOTOS_CARRUSEL.forEach((item, idx) => {
+                    const slideDiv = document.createElement('div');
+                    slideDiv.className = `carousel-slide ${idx === currentIndex ? 'active' : ''}`;
+
+                    const img = document.createElement('img');
+                    img.src = item.url;
+                    img.alt = item.frase;
+                    img.className = 'w-full h-full object-cover object-center';
+
+                    // Respaldo automático en canvas si falla la red o la URL externa
+                    img.onerror = function () {
+                        this.onerror = null;
+                        this.src = generarIlustracionCanvas(
+                            item.frase,
+                            item.emoji,
+                            item.colores[0],
+                            item.colores[1]
+                        );
+                    };
+
+                    slideDiv.appendChild(img);
+                    slidesContainer.appendChild(slideDiv);
+
+                    // Punto indicador inferior
+                    const dot = document.createElement('button');
+                    dot.type = 'button';
+                    dot.ariaLabel = `Ir a la foto ${idx + 1}`;
+                    dot.className = `h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                        idx === currentIndex
+                            ? 'w-7 bg-amber-300 shadow-[0_0_8px_rgba(253,230,138,0.85)]'
+                            : 'w-2 bg-white/45 hover:bg-white/80'
+                    }`;
+                    dot.addEventListener('click', () => {
+                        goToSlide(idx);
+                        startAutoPlay();
+                    });
+                    dotsContainer.appendChild(dot);
+                });
+
+                updateCaption();
+            }
+
+            /**
+             * Actualiza el texto del pie de foto con transición suave
+             */
+            function updateCaption() {
+                if (!captionEl || !FOTOS_CARRUSEL[currentIndex]) return;
+                captionEl.style.opacity = '0';
+                setTimeout(() => {
+                    captionEl.textContent = FOTOS_CARRUSEL[currentIndex].frase;
+                    captionEl.style.opacity = '1';
+                }, 180);
+            }
+
+            /**
+             * Cambia a una diapositiva específica
+             */
+            function goToSlide(index) {
+                const total = FOTOS_CARRUSEL.length;
+                currentIndex = (index + total) % total;
+
+                const allSlides = slidesContainer.querySelectorAll('.carousel-slide');
+                const allDots = dotsContainer.querySelectorAll('button');
+
+                allSlides.forEach((el, idx) => {
+                    el.classList.toggle('active', idx === currentIndex);
+                });
+
+                allDots.forEach((dot, idx) => {
+                    if (idx === currentIndex) {
+                        dot.className = 'h-2 w-7 rounded-full bg-amber-300 shadow-[0_0_8px_rgba(253,230,138,0.85)] transition-all duration-300 cursor-pointer';
+                    } else {
+                        dot.className = 'h-2 w-2 rounded-full bg-white/45 hover:bg-white/80 transition-all duration-300 cursor-pointer';
+                    }
+                });
+
+                updateCaption();
+            }
+
+            function nextSlide() {
+                goToSlide(currentIndex + 1);
+            }
+
+            function prevSlide() {
+                goToSlide(currentIndex - 1);
+            }
+
+            function startAutoPlay() {
+                stopAutoPlay();
+                autoPlayTimer = setInterval(() => {
+                    if (!isPaused && FOTOS_CARRUSEL.length > 1) {
+                        nextSlide();
+                    }
+                }, 4200);
+            }
+
+            function stopAutoPlay() {
+                if (autoPlayTimer) clearInterval(autoPlayTimer);
+            }
+
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                startAutoPlay();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                startAutoPlay();
+            });
+
+            carouselContainer.addEventListener('mouseenter', () => { isPaused = true; });
+            carouselContainer.addEventListener('mouseleave', () => { isPaused = false; });
+
+            // Soporte para gestos táctiles (swipe en celulares)
+            let touchStartX = 0;
+            carouselContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+                isPaused = true;
+            }, { passive: true });
+
+            carouselContainer.addEventListener('touchend', (e) => {
+                const touchEndX = e.changedTouches[0].screenX;
+                const diff = touchStartX - touchEndX;
+                if (Math.abs(diff) > 40) {
+                    if (diff > 0) nextSlide();
+                    else prevSlide();
+                }
+                isPaused = false;
+                startAutoPlay();
+            }, { passive: true });
+
+            renderCarousel();
+            startAutoPlay();
+        })();
+        const bgMusic = new Audio('musica/musica.mp3');
+bgMusic.loop = true;
+
+let isPlaying = false;
+
+function updateUI(playing) {
+    isPlaying = playing;
+    if (playing) {
+        musicIcon.textContent = '🎶';
+        musicLabel.textContent = 'Pausar Música';
+        toggleBtn.classList.add('ring-2', 'ring-amber-300/60');
+    } else {
+        musicIcon.textContent = '🎵';
+        musicLabel.textContent = 'Dale Play a la Música';
+        toggleBtn.classList.remove('ring-2', 'ring-amber-300/60');
+    }
+}
+
+function startMusic() {
+    bgMusic.play()
+        .then(() => {
+            updateUI(true);
+            removeInteractionListeners();
+        })
+        .catch(() => {
+            // El navegador bloqueó el inicio automático; queda a la espera del primer toque
+            updateUI(false);
+        });
+}
+
+function stopMusic() {
+    bgMusic.pause();
+    updateUI(false);
+    removeInteractionListeners();
+}
+
+function handleFirstInteraction() {
+    if (!isPlaying) {
+        startMusic();
+    }
+}
+
+function removeInteractionListeners() {
+    document.removeEventListener('click', handleFirstInteraction);
+    document.removeEventListener('touchstart', handleFirstInteraction);
+    document.removeEventListener('keydown', handleFirstInteraction);
+}
+
+// 1. Intenta iniciar al abrir la página y prepara el respaldo al primer toque
+window.addEventListener('DOMContentLoaded', () => {
+    startMusic();
+    document.addEventListener('click', handleFirstInteraction);
+    document.addEventListener('touchstart', handleFirstInteraction);
+    document.addEventListener('keydown', handleFirstInteraction);
+});
+
+// 2. Control manual del botón
+toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // Evita conflictos con el detector global de clics
+    if (isPlaying) {
+        stopMusic();
+    } else {
+        startMusic();
+    }
+});
+    </script>
+</body>
+</html>
